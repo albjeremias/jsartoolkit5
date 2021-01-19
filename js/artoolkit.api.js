@@ -197,7 +197,7 @@
         // get markers
         var markerNum = this.getMarkerNum();
         var k, o;
-        for (k in this.patternMarkers) {
+        /*for (k in this.patternMarkers) {
             o = this.patternMarkers[k]
             o.inPrevious = o.inCurrent;
             o.inCurrent = false;
@@ -206,13 +206,13 @@
             o = this.barcodeMarkers[k]
             o.inPrevious = o.inCurrent;
             o.inCurrent = false;
-        }
+        }*/
         for (k in this.nftMarkers) {
             o = this.nftMarkers[k]
             o.inPrevious = o.inCurrent;
             o.inCurrent = false;
         }
-
+/*
         // detect fiducial (aka squared) markers
         for (var i = 0; i < markerNum; i++) {
             var markerInfo = this.getMarker(i);
@@ -258,7 +258,7 @@
                 }
             });
         }
-
+*/
         // detect NFT markers
         var nftMarkerCount = this.nftMarkerCount;
         this.detectNFTMarker();
@@ -290,6 +290,15 @@
                         matrixGL_RH: this.transformGL_RH
                     }
                 });
+                return {
+                    data: {
+                        index: i,
+                        type: markerType,
+                        marker: nftMarkerInfo,
+                        matrix: this.transform_mat,
+                        matrixGL_RH: this.transformGL_RH
+                    }
+                };
             } else if (self.markerFound === i) {
                 // for now this marker found/lost events handling is for one marker at a time
                 if ((Date.now() - self.markerFoundTime) <= MARKER_LOST_TIME) {
@@ -312,7 +321,7 @@
                 });
             }
         }
-
+/*
         // detect multiple markers
         var multiMarkerCount = this.getMultiMarkerCount();
         for (var i = 0; i < multiMarkerCount; i++) {
@@ -358,7 +367,7 @@
                 }
             }
         }
-
+*/
         if (this._bwpointer) {
             this.debugDraw();
         }
